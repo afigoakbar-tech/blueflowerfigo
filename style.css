@@ -32,7 +32,6 @@ body{
 /* Bunga umum */
 .flower{
   position:absolute;
-  animation: float 5s ease-in-out infinite;
 }
 
 /* Bunga utama */
@@ -42,6 +41,7 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%, -50%);
+  animation: floatMain 5s ease-in-out infinite;
   z-index:5;
 }
 
@@ -49,9 +49,8 @@ body{
 .flower.small{
   width:150px;
   height:150px;
-  transform:scale(0.6);
-  opacity:0.9;
   animation: floatSmall 6s ease-in-out infinite;
+  opacity:0.9;
 }
 
 /* Posisi bunga kecil */
@@ -60,7 +59,7 @@ body{
 .f3{ bottom:15%; left:18%; }
 .f4{ bottom:20%; right:15%; }
 
-/* Kelopak */
+/* Kelopak dengan ANIMASI MEKAR */
 .petal{
   position:absolute;
   top:50%;
@@ -72,13 +71,34 @@ body{
   background: radial-gradient(circle at top,#99e6ff,#007bff,#001f66);
   border-radius:60% 60% 50% 50%;
 
-  transform-origin: center bottom;
-  transform: translate(-50%, -100%) rotate(var(--rotate)) scale(1);
+  transform-origin:center bottom;
+  transform: translate(-50%, -100%) rotate(var(--rotate)) scale(0);
+
+  opacity:0;
+  animation: bloom 1.5s ease forwards;
 
   box-shadow:
     0 0 20px #00ccff,
     0 0 50px #0088ff,
     0 0 90px #0044ff;
+}
+
+/* Delay mekar satu-satu */
+.petal:nth-child(1){ animation-delay:0.2s;}
+.petal:nth-child(2){ animation-delay:0.4s;}
+.petal:nth-child(3){ animation-delay:0.6s;}
+.petal:nth-child(4){ animation-delay:0.8s;}
+.petal:nth-child(5){ animation-delay:1s;}
+.petal:nth-child(6){ animation-delay:1.2s;}
+.petal:nth-child(7){ animation-delay:1.4s;}
+.petal:nth-child(8){ animation-delay:1.6s;}
+
+/* Animasi mekar */
+@keyframes bloom{
+  to{
+    transform: translate(-50%, -100%) rotate(var(--rotate)) scale(1);
+    opacity:1;
+  }
 }
 
 /* Tengah bunga */
@@ -99,15 +119,15 @@ body{
   z-index:10;
 }
 
-/* Animasi float */
-@keyframes float{
+/* FLOAT tanpa merusak translate center */
+@keyframes floatMain{
   0%,100%{ transform:translate(-50%, -50%) translateY(0);}
   50%{ transform:translate(-50%, -50%) translateY(-15px);}
 }
 
 @keyframes floatSmall{
-  0%,100%{ transform:scale(0.6) translateY(0);}
-  50%{ transform:scale(0.6) translateY(-10px);}
+  0%,100%{ transform:translateY(0);}
+  50%{ transform:translateY(-10px);}
 }
 
 /* Pulse tengah */
