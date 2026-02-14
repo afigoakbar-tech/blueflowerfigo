@@ -1,3 +1,21 @@
+function createMiniFlower(container){
+  for(let i=0;i<8;i++){
+    const petal = document.createElement("div");
+    petal.className="petal";
+    petal.style.setProperty("--rotate", i*45+"deg");
+    container.appendChild(petal);
+  }
+
+  const center = document.createElement("div");
+  center.className="center";
+  container.appendChild(center);
+}
+
+document.querySelectorAll(".flower.small").forEach(f=>{
+  createMiniFlower(f);
+});
+
+/* Partikel glowing */
 function createParticle(xPos = Math.random()*window.innerWidth){
   const p = document.createElement("div");
   p.className = "particle";
@@ -15,13 +33,11 @@ function createParticle(xPos = Math.random()*window.innerWidth){
   p.style.animationDuration = (Math.random()*5+6)+"s";
 
   document.body.appendChild(p);
-
   setTimeout(()=>p.remove(),10000);
 }
 
 setInterval(()=>createParticle(),120);
 
-// Partikel mengikuti mouse
 document.addEventListener("mousemove",(e)=>{
   createParticle(e.clientX);
 });
